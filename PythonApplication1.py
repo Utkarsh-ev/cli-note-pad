@@ -1,27 +1,53 @@
+from ast import Is
+
+
 def create_note ():
-    title=input("input title: ")
-    note_list[title]=input("write your note: ")
+    title=input("input title: ").capitalize().strip()
+    note_list[title]=input("write your note: ").capitalize().strip()
+
+def note_iterate():
+    for i in note_list.keys():
+        print(i)
 
 def show_note():
-     print (note_list.keys())
-     ask=input("do you want to see your note Y/N: ").capitalize
-     if ask=="Y":
+        if note_list=={}:
+            print("the note is empty")
+        else:
+            note_iterate()
 
-            lists=input("write which title you want to see: ")
-            print(note_list.get(lists))
-     else:
-          pass
+        ask=input("do you want to see your note Y/N: ").capitalize().strip()
+        if ask=="Y":
+
+            lists=input("write which title you want to see: ").capitalize().strip()
+            if lists not in note_list.keys():
+                 print("this title does not exist or incorrect")
+            else:
+                 print(f"\n{note_list.get(lists)}\n")
+        else:
+             pass
 
 def delete_note():
-     print(note_list.keys())
-     ask=input("do you want to delete your note Y/N: ").capitalize
+     print(note_iterate())
+     ask=input("do you want to delete your note Y/N: ").capitalize().strip()
      if ask=="Y":
 
-            lists=input("choose which title you want to delete: ")
-            print("you have deleted the following content: ",note_list.pop(lists))
+            lists=input("choose which title you want to delete: ").capitalize().strip()
+            if lists not in note_list:
+                print("title in not in the list ")
+            else:
+                print("you have deleted the following content: ",note_list.pop(lists))
      else:
           pass
+def edit_note():
+    print(note_iterate())
+    print( "which title you want to edit\n ")
+    edit_title=input(":").capitalize().strip()
+    print("write your new content\n")
+    new_content=input(":").capitalize().strip()
+    note_list[edit_title]=new_content
+    print(note_list)
 
+    
 note_list={}
 while True:
     print("choose number for following action \n")
@@ -39,12 +65,10 @@ while True:
     elif user_input=="3":
       delete_note()
     elif user_input=="4":
-        pass
+        edit_note()
     elif user_input=="5":
         break
     else:
-        print("inpt a valid option") 
+        print("input a valid option")
 
-    
-     
     
