@@ -1,5 +1,10 @@
 from ast import Is
-
+import json
+try:
+    with open("notes.json","r") as note_file:
+        note_list=json.load(note_file)
+except:
+    note_list={}
 
 def create_note ():
     title=input("input title: ").capitalize().strip()
@@ -47,8 +52,10 @@ def edit_note():
     note_list[edit_title]=new_content
     print(note_list)
 
-    
-note_list={}
+def json_method():
+     with open("notes.json","w") as note_file:
+         json.dump(note_list,note_file)
+
 while True:
     print("choose number for following action \n")
     print("choose 1 for creating a new file\n")
@@ -60,12 +67,15 @@ while True:
     
     if user_input=="1":      
        create_note()
+       json_method()
     elif user_input=="2":
         show_note()
     elif user_input=="3":
       delete_note()
+      json_method()
     elif user_input=="4":
         edit_note()
+        json_method()
     elif user_input=="5":
         break
     else:
